@@ -44,4 +44,41 @@ const crawlMenu = async (req, res) => {
     }
 }
 
-module.exports = { getDataProductsFromTiki, crawlFeaturedKeywords, crawlMenu }
+const crawlGodBanner = async (req, res) => {
+    try {
+        const data = await axios.get(process.env.TIKI_GOD_BANNER_URL)
+        res.status(200).json(data.data.banner)
+    } catch(err) {
+        res.status(500).json({msg: err.message})
+    }
+}
+
+const crawlSideGodBanner = async (req, res) => {
+    try {
+        const data = await axios.get(process.env.TIKI_SIDE_GOD_BANNER_URL)
+        res.status(200).json(data.data.data)
+    } catch(err) {
+        res.status(500).json({msg: err.message})
+    }
+}
+
+const crawlHotDeals = async (req, res) => {
+    try {
+        const data = await axios.get(process.env.TIKI_HOT_DEALS_URL)
+        res.status(200).json(data.data.data)
+    } catch(err) {
+        res.status(500).json({msg: err.message})
+    }
+}
+
+const crawlMiddleBanner = async (req, res) => {
+    try {
+        const data = await axios.get(process.env.TIKI_MIDDLE_BANNER_URL)
+        res.status(200).json(data.data)
+        console.log(data.data);
+    } catch(err) {
+        res.status(500).json({msg: err.message})
+    }
+}
+
+module.exports = { getDataProductsFromTiki, crawlFeaturedKeywords, crawlMenu, crawlGodBanner, crawlSideGodBanner, crawlHotDeals, crawlMiddleBanner }
